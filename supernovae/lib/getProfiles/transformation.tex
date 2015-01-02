@@ -1,0 +1,66 @@
+%=== PACKAGES ==================================================================
+  \documentclass[a4paper]{article}
+  %Appearance
+  \usepackage{microtype} %better typography
+  \usepackage[english]{babel}
+  \usepackage{fancyhdr} %for fancy page style
+  \usepackage{color} %Added support for color text
+  \usepackage{dsfont}
+
+  %Document Dynamics
+  \usepackage[colorlinks=true]{hyperref} %Manage links
+  \hypersetup{linkcolor=blue}
+  \usepackage{url}
+  \usepackage{geometry} %For easy management of document margins
+  \usepackage{graphicx} %Allows for insertion of images in document
+  \graphicspath{ {figures/} {images/} }
+
+  %Technical
+  \usepackage{amsmath}
+  \usepackage{amsthm}
+  \usepackage{amssymb}
+  \usepackage{tikz}
+  \usepackage{listings} %To insert code blocks
+
+%=== TITLE =====================================================================
+  \title{Determining Semi-Major Axis Scalar for Ellipse passing through SN}
+  \author{}
+  \date{Last Updated: \today}
+
+%=== FRONT MATTER ==============================================================
+  \begin{document}
+  \pagestyle{fancy} \lhead{} \rhead{}
+  \maketitle
+
+%=== BODY ======================================================================
+\noindent We first determine the relative position ($\Delta\vec{d}_{RD}$) of the center of the supernovae,
+$\vec{S}_{RD}$, in terms of the center of the galaxy, $\vec{G}_{RD}$, where `RD'
+implies the right acsencion, declination coordinates (in degrees).
+    \begin{equation}
+    \Delta\vec{d}_{RD} = \vec{S}_{RD} - \vec{G}_{RD}\
+    \end{equation}
+
+\noindent We then convert this relative position vector in terms of pixel coordinates `XY'
+    \begin{equation}
+    \Delta\vec{d}_{XY} = \mathbf{T_1}\cdot\Delta\vec{d}_{RD}\\
+    \end{equation}
+
+\noindent Where $\mathbf{T_1}$ is the scalar transformation, with $P$ the
+arcsecond--pixel ratio;
+    \begin{equation}
+    \mathbf{T_1} = \frac{1}{3600P}\cdot\mathds{1}\\
+    \end{equation}
+
+\noindent We can then determine the supernovae's position in terms of the semi-major and
+semi-minor axies through a rotation matrix;
+\begin{subequations}
+    \begin{align}
+    \begin{pmatrix}b\\a\end{pmatrix}_{SN}=\mathbf{T_2}\cdot\Delta\vec{d}_{XY}\\
+    \mathbf{T_2} = \begin{pmatrix}\cos\theta&-\sin\theta\\ R\sin\theta&R\cos\theta\end{pmatrix}
+    \end{align}
+\end{subequations}
+
+\noindent Where $\theta$ is the position angle and $R$ is the axial ratio
+
+\end{document}
+

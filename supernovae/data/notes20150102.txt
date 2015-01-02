@@ -1,0 +1,25 @@
+Hi Jamie and Alex,
+
+Here are some plot ideas:
+
+1. Plots to see if the SNe hosts are normal compared to all of SINGG
+   * Cumulative fractional luminosity histogram of SNe hosts relative to luminosity in Halpha,R compared to the same histogram of all SINGG galaxies
+   * we can then do Monte-Carlo sims to see if the hosts we have can be drawn from the SINGG parent sample
+   * the idea is that if R or Halpha Luminosity is a fair tracer of the stars from which SNe originate then the SNe should be evenly distributed in fractional luminosity of each tracer
+   * This might need a bit better explaining, 
+   * and some more data grabbed from the IDL database
+
+2. For each SNe host plot the enclosed Halpha and R flux as a function of semi-major axis
+   * Normalize the flux by the total so that the y-axis is from 0 to 1
+   * mark the semi-major axis distance to the SN as a vertical line
+   * mark where it crosses the curves as horizontal lines
+   * store these values of fractional enclosed fluxes
+
+3. Now plot the histograms of fractional enclosed flux at the position of the SNe
+   * There should be separate plost for R and Halpha
+   * If R and Halpha are good tracers of the source populations of the SNe then the histograms should be evenly distributed between 0 and 1.
+
+Cheers
+
+-- Gerhardt
+ 

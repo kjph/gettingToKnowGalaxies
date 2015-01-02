@@ -1,0 +1,20 @@
+FILE='tmp_testbrightness.profile'
+TARGET='./tmp_testprofileget.txt'
+
+readIn=open(FILE, 'r')
+writeOut=open(TARGET, 'w')
+
+for line in readIn:
+    if 'AXERAT' in line:
+        writeOut.write(line)
+    else if ('XCENTER' in line):
+        writeOut.write(line)
+    else if 'YCENTER' in line:
+        writeOut.write(line)
+    else if 'PA_IMAGE' in line:
+        writeOut.write(line)
+    else:
+        pass
+
+readIn.close()
+writeOut.close()

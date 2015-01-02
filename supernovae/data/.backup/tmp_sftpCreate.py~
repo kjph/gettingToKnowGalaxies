@@ -1,0 +1,18 @@
+import os
+
+FILE='/home/kph/Dropbox/files/gettingToKnowGalaxies/supernovae/data/files2grab.dat'
+TARGET='/home/kph/Dropbox/files/gettingToKnowGalaxies/supernovae/data/files2grab_sftp.dat'
+readin=open(FILE, 'r');
+writeout=open(TARGET, 'w');
+
+for line in readin:
+    pathname=line.strip()
+    filename=os.path.basename(pathname)
+    writeString = 'get' + pathname + ' ./' + filename + '\n'
+    writeout.write(writeString)
+
+readin.close()
+writeout.close()
+
+
+
