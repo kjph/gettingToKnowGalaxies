@@ -17,7 +17,7 @@ import re
 import time
 import subprocess
 import glob
-import match            #match.py from working directory
+#import match            #match.py from working directory
 from astropy import units as u
 from astropy.coordinates import SkyCoord
 
@@ -32,16 +32,16 @@ def print_status(out_string):
 #This function then transfers the data in that buffer
 #to the desired location.
 def commit_temp(save_file_loc):
-    save_file_loc_temp = os.path.join(save_file_loc,'.temp')
+    save_file_loc_temp = save_file_loc + '.temp'
     target=open(save_file_loc, "w")
     temp=open(save_file_loc_temp, "r")
 
     for line in temp:
         target.write(line)
 
-        target.close()
-        temp.close()
-        os.remove(save_file_loc_temp)
+    target.close()
+    temp.close()
+    os.remove(save_file_loc_temp)
 
 def RAToDeg(hours,mins,secs):
     return (hours*15.0 + (15.0/60.0)*mins + (15.0/3600.0)*secs)
@@ -128,11 +128,11 @@ def clean_source():
         #string when using wildcards with matching tags
         for i in range(len(line_parts)):
             line_parts[i] = re.sub(r'<a name=".*">', '', line_parts[i])
-            line_parts[i] = re.sub(r'<a href=".*"><i>', '', line_parts[i])
+            line_parts[i] = re.sub(r'<a href="?\'?([^"\'>]*)">', '', line_parts[i])
             line_parts[i] = re.sub(r'<i>', '', line_parts[i])
             line_parts[i] = re.sub(r'</i>', '', line_parts[i])
-            line = ''.join(line_parts)
-            temp.write(line)
+        line = ''.join(line_parts)
+        temp.write(line)
 
     target.close()
     temp.close()
@@ -181,11 +181,11 @@ def extract_sn_data():
     #Select galaxies to include here
     if (sn_name=='' or sn_ra=='' or sn_dec==''):
         pass
-    elif (sn_type=='' or "?" in sn_type):
-        #Flag for review
-        pass
-    elif ("II" not in sn_type):
-        pass
+    #elif (sn_type=='' or "?" in sn_type):
+    #    #Flag for review
+    #    pass
+    #elif ("II" not in sn_type):
+    #    pass
     else:
         sn_ra_deg = RAToDeg(float(sn_ra[0:2]), float(sn_ra[3:5]), float(sn_ra[6:11]))
         sn_dec_deg = DECToDeg(sn_dec[0],float(sn_dec[1:3]), float(sn_dec[4:6]), float(sn_dec[7:11]))
@@ -310,16 +310,16 @@ def main():
     #--------------------------------------------------
     # Fetch the data from IAU
     #--------------------------------------------------
-    #get_source()
-    #removeHeader_source()
-    #removeFoot_trim_source()
-    #clean_source()
+    get_source()
+    removeHeader_source()
+    removeFoot_trim_source()
+    clean_source()
 
     #--------------------------------------------------
     # Parse the desired information from fetched data
     #--------------------------------------------------
-    #extract_sn_data()
-    #write_header()
+    extract_sn_data()
+    write_header()
 
     #--------------------------------------------------
     # Output
@@ -327,7 +327,7 @@ def main():
     #print_status("Matching supernovae to SINGG/SUNGG Galaxies")
     #match.main(MATCH_FILE)
     #regions_files()
-    get_fits_images()
+    #get_fits_images()
     #loop_fits_images()
 
 # SETTINGS
@@ -347,7 +347,7 @@ def main():
 IAU_URL                 = 'http://www.cbat.eps.harvard.edu/lists/Supernovae.html'
 OUT_DIR                 = sys.argv[1]
 SN_DB_FILE              = os.path.join(OUT_DIR, "out_supernovae_get.txt")
-SN_TMP_FILE             = os.path.join(SN_DB_FILE, '.temp')
+SN_TMP_FILE             = SN_DB_FILE + '.temp'
 SN_POS_FILE             = re.sub('.txt', '_pos.txt', SN_DB_FILE)
 MATCH_FILE              = os.path.join(OUT_DIR, "out_supernovae_match.csv")
 STFP_FILE               = "/Users/21326604/Documents/gettingToKnowGalaxies/supernvoae/tmp/stfpFile"
