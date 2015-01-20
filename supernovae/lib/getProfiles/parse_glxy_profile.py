@@ -10,7 +10,15 @@ def alphaNumPassFilter(string):
     return re.sub(r'\W+', '', loweredString)
 
 def return_profilePath(galaxy):
+    galaxy=galaxy.lower()
     #Determine file path for associated profile to the specified galaxy
+
+    #Get rid of galIndex identifier for filename
+    identifier=":s"
+    if identifier in galaxy:
+        galaxy=galaxy[:galaxy.find(identifier)]
+        galaxy=galaxy.upper()
+
     filePath=os.path.abspath(os.path.join(DIR,galaxy))
     filePath=glob.glob('%s*' % filePath)
 
@@ -22,19 +30,42 @@ def return_profilePath(galaxy):
 def return_galIndex(galaxy):
     #Galaxies with the ":s#" suffix are those with galindexs
     galaxy=galaxy.lower()
-    src_string=":s"
-    if src_string in galaxy:
-        galIndex=galaxy[galaxy.find(src_string)+len(src_string)]
-        return galIndex
+    #is ":s" a unique identifier
+    identifier=":s"
+    if identifier in galaxy:
+        galIndex=galaxy[galaxy.find(identifier)+len(identifier)]
+        return int(galIndex)
     #Indicates that there are no galindexes
     else:
         return -1
 
-def getParameters(inFile, outFile):
-    readIn=open(inFile, 'r')
+def getParameters(galaxy, outFile):
+    pixSize=0
+    galIndex=return_galIndex(galaxy)
+    try:
+        readIn=open(return_profilePath(galaxy), 'r')
+    except TypeError:
+        readIn=open(return_profilePath(galaxy)[0], 'r')
+
+    #Move cursor to start of extract
+    if (galIndex != -1):
+        for line in readIn:
+            #Get common parameter PIXSIZE
+            if 'PIXSIZE' in line:
+                pixSize=line.split()[3]
+            elif ('GALINDEX' in line):
+                lineParts=line.split()
+                if (int(lineParts[3]) == galIndex):
+                    break
+
     writeOut=open(outFile, 'w')
+    #read extract
     for line in readIn:
-        if 'AXERAT' in line:
+        print line#DEBUG
+        #stop reading if end of extract
+        if ('GALINDEX' in line and galIndex != -1):
+            break
+        elif 'AXERAT' in line:
             writeValue=line.split()[3]
             writeString='AXERAT='+writeValue+'\n'
             writeOut.write(writeString)
@@ -46,28 +77,22 @@ def getParameters(inFile, outFile):
             writeValue=line.split()[3]
             writeString='YCENTER='+writeValue+'\n'
             writeOut.write(writeString)
-        elif 'PA' in line:
+        elif ('PA ' in line):
             writeValue=line.split()[3]
-            writeString='PA_IMAGE='+writeValue+'\n'
-            writeOut.write(writeString)
-        elif 'PIXSIZE' in line:
-            writeValue=line.split()[3]
-            writeString='PIXSIZE='+writeValue+'\n'
+            writeString='PA='+writeValue+'\n'
             writeOut.write(writeString)
         else:
             pass
 
+    #write common parameter PIXSIZE
+    writeString='PIXSIZE=%s\n'%pixSize
+    writeOut.write(writeString)
+
     readIn.close()
     writeOut.close()
-
-
 
 #Need to determine which of galax is the correct one to use in the profie (as
 #one profile may descrie multiple profiles (delimited by GALINDEX)
 
 if __name__=='__main__':
-    #getParameters(FILE, TARGET)
-    #getProfile('J0209-10')
-    print return_galIndex("J0209-10:S5")
-
-
+    getParameters('J0209-10:S2', 'test.txt')
