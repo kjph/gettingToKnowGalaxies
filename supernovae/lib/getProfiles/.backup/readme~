@@ -48,4 +48,4 @@ in turn can determine the enclosed flux
 [2015-01-20]:   Correctly parsed profile for test galaxy in ./test.txt using an updated version of ./parse_glxy_profile.py
 [2015-01-20]:   Need to run as batch to get all parameters for each galaxy (first confirm with G. that S# corresponds to galIndex)
 [2015-01-20]:   Alex will run conversion on test output and later (maybe) join conversion and parse programs
-
+[2015-01-20]:   Jamie needs to get (RA,DEC) coordinates of SN and Host into output file for conversion program to run
