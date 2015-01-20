@@ -15,6 +15,7 @@ def alphaNumPassFilter(string):
 def glxy_get_RA(glxy, database):
     glxy=alphaNumPassFilter(glxy)
     readIn=open(database, 'r')
+
     for line in readIn:
         #bypass headers in database file
         if (line[0]=='#'):

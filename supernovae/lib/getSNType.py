@@ -1,3 +1,4 @@
+#Extracts type II supernovae matches only
 SN_LIST='../data/out_iau_supernovae_get.txt'
 MATCH_FILE='../data/out_supernovae_match.csv'
 MATCH_FILE_TMP='../data/out_supernovae_match_typeII.csv'

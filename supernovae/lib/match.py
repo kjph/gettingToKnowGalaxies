@@ -63,6 +63,7 @@ def remove_repeats(output_file):
     #sort alphabetically
     lines.sort()#The closest match will be the first for each SN occurance
 
+
     #Remove all subsequent occurances of repeated SN, as the first one is the
     #closest match
     prevSN=lines[0].split()[0]

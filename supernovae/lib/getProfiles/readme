@@ -40,4 +40,9 @@ in turn can determine the enclosed flux
                 -- Appended tasks
                 -- Solution for (b) is determined; not implemented
 [2015-01-02]:	Tutorial on transformation written up in transformation.tex/pdf
+[2015-01-07]:   Need to clean up match file to get rid of repeats
+                -- Need to select correct GALINDEX from profiles
+[2015-01-16]:   J. Removed repeated matches via function in match.py
+[2015-01-16]:   Need to contact G. about what to do with different files for the same galaxy
+[2015-01-16]:   Need to confirm with G. that galaxies with multiple GALINDices are those with the ":s#" suffix
 
