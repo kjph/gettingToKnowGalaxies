@@ -181,11 +181,11 @@ def extract_sn_data():
     #Select galaxies to include here
     if (sn_name=='' or sn_ra=='' or sn_dec==''):
         pass
-    elif (sn_type=='' or "?" in sn_type):
-        #Flag for review
-        pass
-    elif ("II" not in sn_type):
-        pass
+    #elif (sn_type=='' or "?" in sn_type):
+    #    #Flag for review
+    #    pass
+    #elif ("II" not in sn_type):
+    #    pass
     else:
         sn_ra_deg = RAToDeg(float(sn_ra[0:2]), float(sn_ra[3:5]), float(sn_ra[6:11]))
         sn_dec_deg = DECToDeg(sn_dec[0],float(sn_dec[1:3]), float(sn_dec[4:6]), float(sn_dec[7:11]))
