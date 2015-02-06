@@ -1,32 +1,38 @@
 0. Email S. Smartt as to whether it is useful [DONE]
 
-1. We need the up to date list of the SNe matches
+1. We need the up to date list of the SNe matches 
     + With Supernova type, position, position uncertainty
+      [We have this table but without the position uncertainty]
     + we should throw out the non core-collapse supernovae
         - keep all type II if spectroscopically confirmed
         - keep all type Ib and type Ic
         - throw out type Ia
         - throw out cases where the spectral type is just a guess
         - throw out cases where the host is a background galaxy
+      [Jamie had one go at this, but it might need more work]
     + following S. Smartt's comments we may also want to impose
         - a distance limit (TBD)
         - an inclination (or axial ratio) limit
     + JAMIE - can you remind me where to find your matched list?
+      [The relevant file names are out_supernovae_match*]
 
 2. For coordinate transformation below we need some info for Each SN host
     + alpha,delta = (RA,Dec) of central peak (in optical and UV)
     + position angle of major axis (in optical and UV)
     + axial ratio (in optical and UV)
     + effective radii in R, Halpha, FUV, NUV
+   [This step has pretty much been done by Jamie and Alex]
 
 3. Figure out coordinate transformation
     + alpha,delta = (RA,Dec) -> to dx,dy (offset from galaxy centre)
       (alternatively/additionally to i,j pixel position in CCD image)
     + dx,dy -> a, b
     + We want the a value of each SN
+   [Alex is working on this....]
 
 4. We need the profile files for the matched list.
     + Jamie has instructions of where to get the optical data
+   [Gerhardt got those that are available]
 
 5. These need to be converted to enclosed flux versus a/a_eff
 
