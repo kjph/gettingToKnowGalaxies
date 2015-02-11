@@ -1,5 +1,5 @@
-#A module to determine the semi-major axis length of the ellipce that passes
-#through the SN and whos axis are parallel to its host galaxy
+#A module to determine the semi-major axis length of the ellipse that passes
+#through the SN and who's axis are parallel to its host galaxy
 import numpy
 import sys
 import math
@@ -25,3 +25,27 @@ def get_A(PIXRAT, AXERAT, POSANGLE, vec_GX_SN):
     vec_GX_SN = XY_transform*vec_GX_SN
     AB_transform_return_A = numpy.array([AXERAT*math.sin(POSANGLE), AXERAT*math.cos(POSANGLE)])
     return numpy.dot(AB_transform_return_A, vec_GX_SN)
+	
+#Opens the output file of the getParameters function in the Parse_glxy_profile
+#module and uses get_A to append the output file with the Semi-Major Axis Length
+def getPars(filename, vec_GX_SN):
+	file = open(filename, 'a+')
+	for line in file:
+		if 'XCENTER' in line:
+			xCenter = line.split('=')[1]
+		elif 'YCENTER' in line:
+			yCenter = line.split('=')[1]
+		elif 'AXERAT' in line:
+			axeRat = line.split('=')[1]
+		elif 'PA' in line:
+			pA = line.split('=')[1]
+		elif 'PIXSIZE' in line:
+			pixSize = line.split('=')[1]
+		else:
+			pass
+	
+	a = get_A(pixSize, axeRat, pA, vec_GX_SN)
+	toWrite = "AXISLENGTH=%d" % a
+	file.write(toWrite)
+	file.close()
+	return None
