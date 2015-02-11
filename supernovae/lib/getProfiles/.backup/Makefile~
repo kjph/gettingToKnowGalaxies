@@ -1,5 +1,0 @@
-clean:
-	read -p "Confirm clean"
-	rm *.aux
-	rm *.out
-	rm *.log

@@ -1,4 +1,14 @@
 SN      Host Galaxy      Date        R.A.    Decl.    Offset Mag.  Disc. Ref.      SN Position               Posn. Ref.       Type  SN Discoverer(s)
+2015D   NGC 5020         2015 01 18  13 12.7 +12 36   14E   3N  17.5   CBET 4051       13 12 41.16 +12 36 01.8   CBET 4051        IIP   2015D   Jin, Gao (Xingming Sky Survey)
+2015C   IC 4221          2015 01 07  13 18.5 -14 37    2E  12S  16.4   CBET 4049       13 18 30.47 -14 36 44.6   CBET 4049        IIP   2015C   Pina, Zheng, Filippenko (LOSS)
+2015B   NGC 4782         2015 01 05  12 54.6 -12 34    2W  10S  15.0   CBET 4046       12 54 35.53 -12 34 18.6   CBET 4046        Ia    2015B   Leonini et al.
+2015A   NGC 2955         2015 01 09  09 41.3 +35 53   12W  21N  16.6   CBET 4045       09 41 15.55 +35 53 17.4   CBET 4045        Ia    2015A   Itagaki
+2014dy  Anon.            2014 12 19  02 49.0 -00 46    0w   0N  18.8   CBET 4050       02 48 57.86 -00 45 38.5   CBET 4050        Ia    2014dy  Matsumoto et al. (Kiso Supernova Survey)
+2014dx  Anon.            2014 12 25  08 29.6 -17 18    2W   5N  16.4   CBET 4048       08 29 38.20 -17 17 47.3   CBET 4048        Ia    2014dx  Parker
+2014dw  NGC 3568         2014 11 06  11 10.8 -37 27    2W  10S  15.5   CBET 4047       11 10 48.41 -37 27 02.2   CBET 4047        II    2014dw  Parker
+2014dv  NGC 2501         2014 11 17  07 58.5 -14 21    1E   0N  16.0   CBET 4026       07 58 30.10 -14 21 15.0   CBET 4026        Ia    2014dv  Zheng, Filippenko (LOSS)
+2014du  Anon.            2014 10 31  02 26.4 +27 40   38W  18N  17.4   CBET 4022       02 26 23.31 +27 39 34.8   CBET 4022        Ia    2014du  Ciabattari, Mazzoni, Donati
+2014dt  NGC 4303         2014 10 29  12 22.0 +04 28   34E   7S  13.6   CBET 4011       12 21 57.57 +04 28 18.5   CBET 4011        Ia-p  2014dt  Itagaki
 2014ds  NGC 2536         2014 10 11  08 11.3 +25 11    6E   2N  16.3   CBET 4010       08 11 16.45 +25 10 47.4   CBET 4010        IIb   2014ds  Xu, Gao (Xingming Sky Survey)
 2014dr  UGC 2705         2014 10 14  03 22.8 +00 09   12W  23N  16.6   CBET 4009       03 22 46.39 +00 09 20.7   CBET 4009        II    2014dr  Howerton, Drake et al. (Catalina Real-time Transient Survey)
 2014dq  ESO 467-G51      2014 10 19  22 23.3 -28 59    7W  20N  16.9   CBET 4008       22 23 16.09 -28 58 31.8   CBET 4008        II    2014dq  All-Sky Automated Survey for Supernovae; Bock
@@ -5689,7 +5699,7 @@ SN      Host Galaxy      Date        R.A.    Decl.    Offset Mag.  Disc. Ref.   
 1991M   IC 1151          1991 03 12  15 58.6 +17 26   36E  60N  15     IAUC 5207       15 58 34.83 +17 27 28.7   IAUC 5239        Ia    1991M   Pennypacker, Perlmutter, et al.
 1991L   MCG +07-34-134   1991 02 24  16 41.2 +39 17    2W   8N  18     IAUC 5200       16 41 15.03 +39 17 32.6   IAUC 5200        Ib/c  1991L   Pollas
 1991K   NGC 2851         1991 02 20  09 20.6 -16 31    5E  19S  16.5   IAUC 5196       09 20 30.46 -16 30 01.8   IAUC 5196        Ib    1991K   McNaught
-1991J   NGC 5020         1991 02 19  13 12.7 +12 36   34W  56S  17     IAUC 5196                                                        1991J   Mueller
+1991J   NGC 5020         1991 02 19  13 12.7 +12 36   34W  56S  17     IAUC 5196                                                  II    1991J   Mueller
 1991I   Anon.            1991 02 14  05 26.4 -52 14    0    1N  18.5   IAUC 5191       05 26 25.62 -52 13 33.0   IAUC 5191              1991I   McNaught
 1991H   Anon.            1991 02 12  12 58.9 -10 44    2W  11S  17.5   IAUC 5188       12 58 54.12 -10 44 02.1   IAUC 5188        II    1991H   McNaught
 1991G   NGC 4088         1991 02 10  12 05.5 +50 31   37W  13S  17     IAUC 5188       12 05 28.85 +50 32 11.7   AJ 111, 2017     II    1991G   Mueller
