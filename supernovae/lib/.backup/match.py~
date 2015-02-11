@@ -94,4 +94,4 @@ def main(output_file):
 	#write_results(output_file, index, dist2D, cat1_name, cat2_name)
     remove_repeats(output_file)
 
-main('../data/out_supernovae_match_typeII.txt')
+main('../data/test_match.txt')
