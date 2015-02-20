@@ -2,6 +2,11 @@
 #This script will be used to collate all the necessary data into one TXT file
 #This TXT file will be used in the KS-Test
 
+#note about debugging
+#All lines that are used for the purpose of debugging are prepended with the tag
+#'#DEBUG'. However there are lines that are modified for debugging and cannot be
+#removed completely from the program. These are prepended with the tag '#D2EBUG'
+
 import re
 import os
 import glob
@@ -9,12 +14,17 @@ import ksTest_transform
 
 #-------------------------------------------------------------------------------
 #DEFINE PATHS
-DATA_DIR="/home/kph/Dropbox/files/gettingToKnowGalaxies/supernovae/data"
+DATA_DIR="/Users/21326604/Downloads/gettingToKnowGalaxies/supernovae/data"
+#DATA_DIR="/home/kph/Dropbox/files/gettingToKnowGalaxies/supernovae/data"
 #DATA_DIR="/home/uniwa/students4/students/21326604/linux/Downloads/gettingToKnowGalaxies/supernovae/data"
 MATCH_FILE=os.path.join(DATA_DIR,"out_supernovae_match_typeII.txt")
 GLXY_DATA=os.path.join(DATA_DIR,"glxy_data.dat")
 SN_DATA=os.path.join(DATA_DIR,"out_supernovae_get_pos.txt")
 PROFILE_DIR=os.path.join(DATA_DIR,"opticalProfiles/")
+
+#-------------------------------------------------------------------------------
+def printDebug(glxy, iD, msg):
+    print "[%s:%s]: %s" % (glxy, iD, msg)
 
 #-------------------------------------------------------------------------------
 #string is returned with only alphanumeric characters and lowercase
@@ -87,15 +97,22 @@ def return_profilePath(galaxy):
     identifier=":s"
     if identifier in galaxy:
         galaxy=galaxy[:galaxy.find(identifier)]
-        print "Searching profile for %s" % (galaxy)#DEBUG
+        print "[%s:96] Searching profile for %s" % (galaxy,galaxy)#DEBUG
         galaxy=galaxy.upper()
 
     filePath=os.path.abspath(os.path.join(PROFILE_DIR,galaxy))
     filePath=glob.glob('%s*' % filePath)
 
     #Determine which file of the many (if there are many) to use
+    #FIX
+    print "[%s], %s" % (galaxy,filePath)#DEBUG
+    #if type(filePath) is list & len(filePath)>0:
+    #    return filePath[0]
+    #elif type(filePath) is str:
+    #    return filePath
+    #else:
+    #    return -1
 
-    #return path for opening later in program
     return filePath
 
 #-------------------------------------------------------------------------------
@@ -121,17 +138,19 @@ def getParameters(galaxy):
     try:
         readIn=open(return_profilePath(galaxy), 'r')
     except TypeError,err:
-        print err#DEBUG
+        print "[%s:137]: %s" % (galaxy,err)#DEBUG
         try:
             readIn=open(return_profilePath(galaxy)[0], 'r')
         except IndexError:
-            print "%s: No profile found" % galaxy#DEBUG
+            print "[%s:141]: %s: No profile found" % (galaxy,galaxy)#DEBUG
             return -1 #Indicates no profile was found
 
-    #Error Checking
+    #Intialization
+    printDebug(galaxy,"149","initialized done")
     (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa)=(-1,-1,-1,-1,-1)
 
     #Move cursor to start of extract
+    printDebug(galaxy,"153",galIndex)
     if (galIndex != -1):
         for line in readIn:
             #Get common parameter PIXSIZE
@@ -146,12 +165,14 @@ def getParameters(galaxy):
     #read extract
     for line in readIn:
         #stop reading if end of extract
-        if ('GALINDEX' in line and galIndex != -1):
+        if (('GALINDEX' in line) and (galIndex != -1)):
             break
         elif 'PIXSIZE' in line:
             pp_pixSize=line.split()[3]
+            printDebug(galaxy,"169",pp_pixSize)
         elif 'AXERAT' in line:
             pp_axeRat=line.split()[3]
+            printDebug(galaxy,"175",pp_axeRat)
         elif 'XCENTER' in line:
             pp_xCenter=line.split()[3]
         elif 'YCENTER' in line:
@@ -214,10 +235,11 @@ def format_output(outputFile):
         try:
             (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa)=getParameters(glxy)
             vec_GX_SN=ksTest_transform.get_vec_GX_SN(sn_ra, sn_dec, glxy_ra, glxy_dec)
-            print vec_GX_SN
+            print "[%s:230]: %s" % (glxy,vec_GX_SN)#DEBUG
             semiMajorLength=ksTest_transform.get_A(pp_pixSize, pp_axeRat, pp_pa, vec_GX_SN)
+            printDebug(glxy, "240", "passed")
         except TypeError,err:#D2EBUG
-            print err#DEBUG
+            print "[%s]: 226: %s " % (glxy, str(err))#DEBUG
             (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa, semiMajorLength)=(-1,-1,-1,-1,-1,-1)
 
         #MERGE TO ONE STRING

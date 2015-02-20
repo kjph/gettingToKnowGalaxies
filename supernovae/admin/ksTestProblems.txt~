@@ -1,0 +1,15 @@
+20/2/2015
+
+Issue in parse.py; output is not correctly writing the values of the profile
+parameters, or getting the correct value for semi major length A.
+
+1. ksTest Transform module is causing program to fail the 'try' of line 235-240.
+This causes the program to move to the exception of lines 241-243, forcing the
+variables 'pp_*' to take a value of -1
+
+2. All galaxies without the identifiers ':s#' do not suspicisouly have profiles.
+Please check this. When we check for the identifier, it might be that these
+identifier-less galaxies are being ignored
+
+3. We need to check if the correct identifiers are being re-written. All of the
+galaxies with identifiers seem to all have gal indexs of 1.

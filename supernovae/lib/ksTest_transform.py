@@ -21,8 +21,12 @@ def get_A(PIXRAT, AXERAT, POSANGLE, vec_GX_SN):
         die("vec_GX_SN must be a numpy type array")
         return NULL
 
+    PIXRAT=float(PIXRAT)
+    AXERAT=float(AXERAT)
+    POSANGLE=float(POSANGLE)
     XY_transform = numpy.array([1/(3600*PIXRAT), 1/(3600*PIXRAT)])
     vec_GX_SN = XY_transform*vec_GX_SN
     AB_transform_return_A = numpy.array([AXERAT*math.sin(POSANGLE), AXERAT*math.cos(POSANGLE)])
-    return numpy.dot(AB_transform_return_A, vec_GX_SN)
+    semiMajorA=numpy.dot(AB_transform_return_A, vec_GX_SN)
+    return semiMajorA
 
