@@ -2,13 +2,20 @@
 #This script will be used to collate all the necessary data into one TXT file
 #This TXT file will be used in the KS-Test
 
+#note about debugging
+#All lines that are used for the purpose of debugging are prepended with the tag
+#'#DEBUG'. However there are lines that are modified for debugging and cannot be
+#removed completely from the program. These are prepended with the tag '#D2EBUG'
+
 import re
 import os
 import glob
+import ksTest_transform
 
 #-------------------------------------------------------------------------------
 #DEFINE PATHS
-DATA_DIR="/home/uniwa/students4/students/21326604/linux/Downloads/gettingToKnowGalaxies/supernovae/data"
+DATA_DIR="/home/kph/Dropbox/files/gettingToKnowGalaxies/supernovae/data"
+#DATA_DIR="/home/uniwa/students4/students/21326604/linux/Downloads/gettingToKnowGalaxies/supernovae/data"
 MATCH_FILE=os.path.join(DATA_DIR,"out_supernovae_match_typeII.txt")
 GLXY_DATA=os.path.join(DATA_DIR,"glxy_data.dat")
 SN_DATA=os.path.join(DATA_DIR,"out_supernovae_get_pos.txt")
@@ -85,6 +92,7 @@ def return_profilePath(galaxy):
     identifier=":s"
     if identifier in galaxy:
         galaxy=galaxy[:galaxy.find(identifier)]
+        print "Searching profile for %s" % (galaxy)#DEBUG
         galaxy=galaxy.upper()
 
     filePath=os.path.abspath(os.path.join(PROFILE_DIR,galaxy))
@@ -117,10 +125,12 @@ def getParameters(galaxy):
     galIndex=return_galIndex(galaxy)
     try:
         readIn=open(return_profilePath(galaxy), 'r')
-    except TypeError:
+    except TypeError,err:
+        print err#DEBUG
         try:
             readIn=open(return_profilePath(galaxy)[0], 'r')
         except IndexError:
+            print "%s: No profile found" % galaxy#DEBUG
             return -1 #Indicates no profile was found
 
     #Error Checking
@@ -194,14 +204,6 @@ def format_output(outputFile):
 
     for line in read_in:
         parts=line.split(',')
-        #GET GALAXY-RELATED PARAMETERS
-        glxy=parts[0]
-        glxy_ra=glxy_get_RA(glxy, GLXY_DATA)
-        glxy_dec=glxy_get_DEC(glxy, GLXY_DATA)
-        try:
-            (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa)=getParameters(glxy)
-        except TypeError:
-            (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa)=(-1,-1,-1,-1,-1)
 
         #GET SN COORD's
         sn=parts[1]
@@ -210,8 +212,22 @@ def format_output(outputFile):
         except TypeError:
             (sn_ra,sn_dec)=(-1,-1)
 
+        #GET GALAXY-RELATED PARAMETERS
+        glxy=parts[0]
+        glxy_ra=glxy_get_RA(glxy, GLXY_DATA)
+        glxy_dec=glxy_get_DEC(glxy, GLXY_DATA)
+        try:
+            (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa)=getParameters(glxy)
+            vec_GX_SN=ksTest_transform.get_vec_GX_SN(sn_ra, sn_dec, glxy_ra, glxy_dec)
+            print vec_GX_SN
+            semiMajorLength=ksTest_transform.get_A(pp_pixSize, pp_axeRat, pp_pa, vec_GX_SN)
+        except TypeError,err:#D2EBUG
+            print err#DEBUG
+            (pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa, semiMajorLength)=(-1,-1,-1,-1,-1,-1)
+
         #MERGE TO ONE STRING
-        writeString="%s%10s%20s%10s%20s%20s%10s%10s%10s%10s%10s\n" % ('{0: <20}'.format(glxy), glxy_ra, glxy_dec, sn, sn_ra, sn_dec, pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa)
+        writeString="%s%10s%20s%10s%20s%20s%10s%10s%10s%10s%10s%10s\n" % ('{0: <20}'.format(glxy), glxy_ra, glxy_dec, sn, sn_ra, sn_dec, pp_pixSize, pp_axeRat, pp_xCenter, pp_yCenter, pp_pa, semiMajorLength)
+
         write_out.write(writeString)
 
     write_out.close()
