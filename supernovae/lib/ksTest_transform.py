@@ -24,9 +24,9 @@ def get_A(PIXRAT, AXERAT, POSANGLE, vec_GX_SN):
     PIXRAT=float(PIXRAT)
     AXERAT=float(AXERAT)
     POSANGLE=float(POSANGLE)
-    XY_transform = numpy.array([1/(3600*PIXRAT), 1/(3600*PIXRAT)])
+    XY_transform = numpy.array([3600/PIXRAT, 3600/PIXRAT])#changed from 1/(3600*PIXRAT) (Alex)
     vec_GX_SN = XY_transform*vec_GX_SN
-    AB_transform_return_A = numpy.array([AXERAT*math.sin(POSANGLE), AXERAT*math.cos(POSANGLE)])
+    AB_transform_return_A = numpy.array([AXERAT*math.sin((POSANGLE*math.pi)/180), AXERAT*math.cos((POSANGLE*math.pi)/180)])#changed angle to radians (Alex)
     semiMajorA=numpy.dot(AB_transform_return_A, vec_GX_SN)
     return semiMajorA
 
