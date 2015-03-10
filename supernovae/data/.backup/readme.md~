@@ -13,11 +13,3 @@
 |**supernovae_ds9_overlay/**|                   |Directory containing regions files for DS9 overlays
 |supernovae_host_data.dat   |G.                 |Data of supernovae host galaxies
 |test_match.txt             |??                 |??
-
-
-
-out_supernovae_match_typeII.txt
-readme.md
-supernovae_host_data.dat
-test_match.txt
-
