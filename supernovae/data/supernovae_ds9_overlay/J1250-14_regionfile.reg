@@ -1,0 +1,2 @@
+global color=green font="helvetica 20 normal roman" wcs=wcs
+j2000; circle 192.510875d -14.715472d 0.002800d # text = {2008io}

@@ -1,0 +1,2 @@
+global color=green font="helvetica 20 normal roman" wcs=wcs
+j2000; circle 41.586625d -30.318361d 0.002800d # text = {1999eu}

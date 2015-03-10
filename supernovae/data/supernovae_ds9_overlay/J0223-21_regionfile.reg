@@ -1,0 +1,2 @@
+global color=green font="helvetica 20 normal roman" wcs=wcs
+j2000; circle 35.775708d -21.232861d 0.002800d # text = {1994ai}

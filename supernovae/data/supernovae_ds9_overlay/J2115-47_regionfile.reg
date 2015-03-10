@@ -1,0 +1,2 @@
+global color=green font="helvetica 20 normal roman" wcs=wcs
+j2000; circle 318.796208d -47.226194d 0.002800d # text = {2010dx}
